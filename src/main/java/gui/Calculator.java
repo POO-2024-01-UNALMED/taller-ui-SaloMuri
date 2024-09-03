@@ -14,9 +14,9 @@ import javafx.scene.text.Text;
 
 public class Calculator extends VBox implements EventHandler<ActionEvent> {
 
-	String primerNumero = "";
-	String segundoNumero = "";
-	String operador;
+	String number1 = "";
+	String number2 = "";
+	String operator;
 	Text displayText;
 
 	public Calculator() {
@@ -128,20 +128,20 @@ public class Calculator extends VBox implements EventHandler<ActionEvent> {
 		String value = b.getText();
 		
 	    if ("0123456789".contains(value)) {
-	        if (operador == null) {
-	            primerNumero += value;
-	            displayText.setText(primerNumero);
+	        if (operator == null) {
+	            number1 += value;
+	            displayText.setText(number1);
 	        } else {
-	            segundoNumero += value;
-	            displayText.setText(segundoNumero);
+	            number2 += value;
+	            displayText.setText(number2);
 	        }
 	    } else if ("+-*/".contains(value)) {
-	        if (!primerNumero.isEmpty() && !segundoNumero.isEmpty()) {
-	            double numero1 = Double.parseDouble(primerNumero);
-	            double numero2 = Double.parseDouble(segundoNumero);
+	        if (!number1.isEmpty() && !number2.isEmpty()) {
+	            double numero1 = Double.parseDouble(number1);
+	            double numero2 = Double.parseDouble(number2);
 	            double resultado = 0;
 
-	            switch (operador) {
+	            switch (operator) {
 	                case "+":
 	                    resultado = numero1 + numero2;
 	                    break;
@@ -156,22 +156,22 @@ public class Calculator extends VBox implements EventHandler<ActionEvent> {
 	                        resultado = numero1 / numero2;
 	                    } else {
 	                        displayText.setText("Error");
-	                        primerNumero = segundoNumero = operador = "";
+	                        number1 = number2 = operator = "";
 	                        return;
 	                    }
 	                    break;
 	            }
-	            primerNumero = String.valueOf(resultado);
-	            segundoNumero = "";
+	            number1 = String.valueOf(resultado);
+	            number2 = "";
 	        }
-	        operador = value;
+	        operator = value;
 	    } else if ("=".equals(value)) {
-	        if (!primerNumero.isEmpty() && !segundoNumero.isEmpty() && operador != null) {
-	            double numero1 = Double.parseDouble(primerNumero);
-	            double numero2 = Double.parseDouble(segundoNumero);
+	        if (!number1.isEmpty() && !number2.isEmpty() && operator != null) {
+	            double numero1 = Double.parseDouble(number1);
+	            double numero2 = Double.parseDouble(number2);
 	            double resultado = 0;
 
-	            switch (operador) {
+	            switch (operator) {
 	                case "+":
 	                    resultado = numero1 + numero2;
 	                    break;
@@ -186,21 +186,21 @@ public class Calculator extends VBox implements EventHandler<ActionEvent> {
 	                        resultado = numero1 / numero2;
 	                    } else {
 	                        displayText.setText("Error"); 
-	                        primerNumero = segundoNumero = operador = "";
+	                        number1 = number2 = operator = "";
 	                        return;
 	                    }
 	                    break;
 	            }
 
 	            displayText.setText(String.valueOf(resultado));
-	            primerNumero = String.valueOf(resultado);
-	            segundoNumero = "";
-	            operador = null;
+	            number1 = String.valueOf(resultado);
+	            number2 = "";
+	            operator = null;
 	        }
 	    } else if ("C".equals(value)) {
-	        primerNumero = "";
-	        segundoNumero = "";
-	        operador = null;
+	        number1 = "";
+	        number2 = "";
+	        operator = null;
 	        displayText.setText("");
 	    }
 
